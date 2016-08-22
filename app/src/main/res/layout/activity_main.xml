@@ -9,8 +9,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hitachi_tstv.yodpanom.yaowaluk.trackinginout.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:hint="@string/hint_editText" />
+
+        <ImageView
+            android:id="@+id/selectImageInCameraBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="5dip"
+            android:src="@drawable/take_photo_button_state" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView" />
+
+    </LinearLayout>
 </RelativeLayout>

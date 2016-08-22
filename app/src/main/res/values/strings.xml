@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TrackingInOut</string>
+
+    <string name="hint_editText">ทะเบียนรถ</string>
 </resources>
