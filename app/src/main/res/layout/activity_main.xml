@@ -32,9 +32,10 @@
             android:src="@drawable/take_photo_button_state" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView" />
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 </RelativeLayout>

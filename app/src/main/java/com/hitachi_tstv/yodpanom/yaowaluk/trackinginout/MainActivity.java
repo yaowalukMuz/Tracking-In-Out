@@ -23,8 +23,9 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private  static final String TAG = "CallCamera";
-    private  static final int  CAPTURE_IMAGE_ACTIVITY_REQ = 0;
-
+    private  static final int  CAPTURE_IMAGE_ACTIVITY_REQ = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private  static final int CAMERA_REQUEST = 1888;
     Uri fileUri = null;
     ImageView photoImage = null;
 
@@ -66,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e(TAG, "Failed to onclike");
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQ );
+                if(i.resolveActivity(getPackageManager())!= null){
+                    startActivityForResult(i, REQUEST_IMAGE_CAPTURE );
+                }
             }
 
         });
@@ -75,24 +77,32 @@ public class MainActivity extends AppCompatActivity {
     }//main method
 
     protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQ) {
-            if (resultCode == RESULT_OK) {
-                Uri photoUri = null;
-                if (data == null) {
-                    Toast.makeText(this, "Image save successfully", Toast.LENGTH_LONG).show();
-                    photoUri = fileUri;
-                } else {
-                    photoUri = data.getData();
-                    Log.e(TAG, "image::::::" +photoUri);
-                    Toast.makeText(this,"Callout for image capture failed!",Toast.LENGTH_LONG).show();
-                }
-                showPhoto(photoUri.getPath());
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Callout for image capture failed!",
-                        Toast.LENGTH_LONG).show();
-            }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            photoImage.setImageBitmap(imageBitmap);
+
+
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+//            photoImage.setImageBitmap(photo);
+//            if (resultCode == RESULT_OK) {
+//                Uri photoUri = null;
+//                if (data == null) {
+//                    Toast.makeText(this, "Image save successfully", Toast.LENGTH_LONG).show();
+//                    photoUri = fileUri;
+//                } else {
+//                    photoUri = data.getData();
+//                    Log.e(TAG, "image::::::" +photoUri);
+//                    Toast.makeText(this,"Callout for image capture failed!",Toast.LENGTH_LONG).show();
+//                }
+//                showPhoto(photoUri.getPath());
+//            } else if (resultCode == RESULT_CANCELED) {
+//                Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(this, "Callout for image capture failed!",
+//                        Toast.LENGTH_LONG).show();
+//            }
         }
     }//end onActivityResult;
 
